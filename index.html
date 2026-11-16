@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Attendant</title><link rel="stylesheet" href="/styles.css">
+  <script src="https://meet.jit.si/external_api.js"></script>
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar"><a class="brand" href="/"><span class="brand-mark">SA</span><span>Smart<span class="brand-light">Attendant</span></span></a><div class="top-right"><span class="live-dot"></span><span>Classroom workspace</span></div></header>
+  <main class="shell">
+    <section id="authView" class="auth-layout">
+      <div class="hero">
+        <div class="eyebrow"><span class="eyebrow-line"></span> SMART CLASSROOM PLATFORM</div>
+        <h1>Attendance,<br><span>without the roll call.</span></h1>
+        <p class="hero-copy">Launch a live class, let students join, and record attendance automatically while the lesson happens.</p>
+        <div class="hero-visual reveal-on-scroll" aria-label="Illustration of a digital classroom">
+          <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+          <div class="visual-chip chip-live"><span></span> LIVE CLASS</div>
+          <svg class="classroom-art" viewBox="0 0 520 300" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="screenGrad" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#4268ff"/><stop offset="1" stop-color="#243fd1"/></linearGradient>
+              <linearGradient id="cardGrad" x1="0" x2="1"><stop stop-color="#ffffff"/><stop offset="1" stop-color="#edf2ff"/></linearGradient>
+            </defs>
+            <ellipse cx="258" cy="265" rx="205" ry="20" fill="#dfe7fa" opacity=".65"/>
+            <rect x="118" y="35" width="285" height="174" rx="18" fill="#172744" opacity=".10"/>
+            <rect x="110" y="27" width="285" height="174" rx="18" fill="url(#screenGrad)"/>
+            <rect x="124" y="41" width="257" height="146" rx="10" fill="#f7f9ff"/>
+            <rect x="139" y="55" width="104" height="9" rx="4" fill="#dbe4ff"/>
+            <rect x="139" y="73" width="72" height="6" rx="3" fill="#e8edf7"/>
+            <rect x="139" y="91" width="108" height="70" rx="9" fill="#eaf0ff"/>
+            <circle cx="193" cy="115" r="17" fill="#8fa7ff"/>
+            <path d="M163 153c6-20 53-20 60 0" fill="#8fa7ff"/>
+            <rect x="258" y="91" width="105" height="8" rx="4" fill="#d8e2fb"/>
+            <rect x="258" y="108" width="88" height="6" rx="3" fill="#e5eaf4"/>
+            <rect x="258" y="123" width="98" height="6" rx="3" fill="#e5eaf4"/>
+            <rect x="258" y="143" width="74" height="22" rx="7" fill="#dff7ee"/>
+            <circle cx="270" cy="154" r="4" fill="#20b78a"/>
+            <rect x="225" y="202" width="56" height="12" rx="5" fill="#aebde7"/>
+            <path d="M195 215h116l17 12H178z" fill="#c8d3ef"/>
+            <g class="art-person person-left"><circle cx="78" cy="183" r="21" fill="#ffc9a6"/><path d="M57 180c0-31 43-36 45-3-12-8-27-8-45 3" fill="#344b7a"/><path d="M43 252c3-43 17-54 35-54s34 13 37 54" fill="#79c9b0"/><path d="M57 218l-19 28M100 218l19 25" stroke="#ffc9a6" stroke-width="11" stroke-linecap="round"/></g>
+            <g class="art-person person-right"><circle cx="443" cy="187" r="20" fill="#eeb895"/><path d="M423 183c2-28 39-31 43-1-14-9-28-8-43 1" fill="#263653"/><path d="M409 254c3-42 17-53 34-53 19 0 34 13 37 53" fill="#ffcf83"/><path d="M421 220l-18 27M462 220l17 25" stroke="#eeb895" stroke-width="10" stroke-linecap="round"/></g>
+            <g class="art-spark"><path d="M55 65v18M46 74h18M455 67v18M446 76h18" stroke="#6c8cff" stroke-width="3" stroke-linecap="round"/></g>
+          </svg>
+          <div class="visual-chip chip-attendance">✓ Attendance captured</div>
+        </div>
+
+        <div class="feature-pills"><span>↗ Live meetings</span><span>◉ Automatic attendance</span><span>▤ CSV reports</span></div>
+        <div class="hero-foot"><div class="avatar-stack"><i> T </i><i> S </i><i> A </i></div><span>One simple space for teachers and students</span></div>
+      </div>
+      <div class="auth-card">
+        <div class="tabs"><button class="tab active" data-auth-tab="login">Sign in</button><button class="tab" data-auth-tab="register">Create account</button></div>
+        <div class="role-switch"><button class="role active" data-role="teacher">Teacher</button><button class="role" data-role="student">Student</button></div>
+        <form id="loginForm" class="auth-form">
+          <div><label>Email address</label><input name="email" type="email" placeholder="you@gmail.com" required></div>
+          <div><label>Password</label><input name="password" type="password" placeholder="Enter your password" required></div>
+          <button class="primary-btn full" type="submit">Sign in <span>→</span></button>
+        </form>
+        <form id="registerForm" class="auth-form hidden">
+          <div><label>Full name</label><input name="name" placeholder="Your name" required></div>
+          <div><label>Email address <span class="hint">(Gmail only for students)</span></label><input name="email" type="email" placeholder="you@gmail.com" required></div>
+          <div><label>Password <span class="hint">(minimum 8 characters)</span></label><input name="password" type="password" minlength="8" required></div>
+          <button class="primary-btn full" type="submit">Create account <span>→</span></button>
+        </form>
+        <p id="authMessage" class="message" aria-live="polite"></p>
+        <p class="fineprint">Free demo build · No paid Zoom API required</p>
+      </div>
+    </section>
+
+    <section id="dashboardView" class="hidden">
+      <div class="dash-head"><div><div class="eyebrow"><span class="eyebrow-line"></span><span id="dashKicker">WORKSPACE</span></div><h1 id="welcomeTitle">Welcome back</h1><p id="welcomeSub" class="muted">Your classroom overview.</p></div><button id="logoutBtn" class="outline-btn">Log out ↗</button></div>
+      <div id="teacherPanel" class="hidden">
+        <div class="stats-grid" id="teacherStats"></div>
+        <div class="content-grid">
+          <section class="panel"><div class="panel-head"><div><h2>Your classes</h2><p>Create a class and share its code with students.</p></div><span class="panel-icon">▦</span></div>
+            <form id="classForm" class="inline-form"><input name="name" placeholder="e.g. Engineering Mathematics" required><button class="primary-btn" type="submit">+ Create class</button></form>
+            <div id="classList" class="class-list"></div>
+          </section>
+          <section class="panel side-panel"><div class="panel-head"><div><h2>How it works</h2><p>Three steps to a live attendance record.</p></div></div>
+            <div class="steps"><div class="step"><b>01</b><div><strong>Create a class</strong><small>Share the unique class code.</small></div></div><div class="step"><b>02</b><div><strong>Launch a meeting</strong><small>Start a free Jitsi video room.</small></div></div><div class="step"><b>03</b><div><strong>Review attendance</strong><small>Join/leave times are recorded automatically.</small></div></div></div>
+            <div class="notice"><span>ⓘ</span><p>Attendance is recorded when a student joins the embedded meeting from their Smart Attendant account. Ask students to use their own login.</p></div>
+          </section>
+        </div>
+        <section id="classAttendancePanel" class="panel meeting-panel hidden">
+          <div class="panel-head attendance-head"><div><div class="eyebrow">CLASS REPORT</div><h2 id="classAttendanceTitle">Class attendance</h2><p id="classAttendanceMeta">Attendance across all meetings for this class.</p></div><div class="meeting-actions"><button id="classExportBtn" class="outline-btn">↓ Export class CSV</button><button id="closeClassAttendanceBtn" class="mini-btn">Close</button></div></div>
+          <div id="classAttendanceTable" class="table-wrap"></div>
+        </section>
+        <section id="teacherMeetingPanel" class="panel meeting-panel hidden">
+          <div class="panel-head"><div><div class="eyebrow">LIVE CLASS</div><h2 id="teacherMeetingTitle">Meeting</h2><p id="teacherMeetingMeta"></p></div><div class="meeting-actions"><span class="status-pill"><i></i> Live</span><button id="endMeetingBtn" class="danger-btn">End meeting</button></div></div>
+          <div id="teacherJitsi" class="jitsi-frame"></div>
+          <div class="panel-head attendance-head"><div><h2>Attendance</h2><p>Students currently in or who attended this meeting.</p></div><button id="exportBtn" class="outline-btn">↓ Export CSV</button></div>
+          <div id="teacherAttendance" class="table-wrap"></div>
+        </section>
+      </div>
+      <div id="studentPanel" class="hidden">
+        <div class="stats-grid" id="studentStats"></div>
+        <section class="panel" style="margin-bottom:20px">
+          <div class="panel-head"><div><h2>Join a class</h2><p>Enter the registration code shared by your teacher.</p></div><span class="panel-icon">＋</span></div>
+          <form id="studentJoinForm" class="inline-form"><input name="classCode" placeholder="Enter class code (e.g. 4D44DC)" maxlength="12" required><button class="primary-btn" type="submit">Join class</button></form>
+          <div id="studentClasses" class="class-list" style="margin-top:14px"></div>
+        </section>
+        <div class="content-grid student-grid">
+          <section class="panel"><div class="panel-head"><div><h2>Live classes</h2><p>Join an active class to record your attendance.</p></div><span class="panel-icon">◉</span></div><div id="studentSessions" class="class-list"></div></section>
+          <section class="panel"><div class="panel-head"><div><h2>Your attendance</h2><p>Your recent class participation.</p></div></div><div id="studentAttendance" class="table-wrap"></div></section>
+        </div>
+        <section id="studentMeetingPanel" class="panel meeting-panel hidden">
+          <div class="panel-head"><div><div class="eyebrow">JOINED CLASS</div><h2 id="studentMeetingTitle">Meeting</h2><p id="studentMeetingMeta"></p></div><button id="leaveMeetingBtn" class="danger-btn">Leave class</button></div>
+          <div id="studentJitsi" class="jitsi-frame"></div>
+          <p class="muted small-note">Keep this page open while attending. Your join and leave times are recorded by Smart Attendant.</p>
+        </section>
+      </div>
+    </section>
+    <footer><span>SMART ATTENDANT</span><span>Built for simpler classrooms · Free demo edition</span></footer>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+</body></html>
