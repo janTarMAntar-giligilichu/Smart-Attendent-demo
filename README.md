@@ -88,3 +88,5 @@ smart-attendant/
 - Students enter a teacher's class registration code in the dashboard to enroll.
 - The same student account can enroll in multiple classes using additional class codes.
 - Existing class-bound student records are migrated into student accounts when the server starts.
+
+some bonus is the the website I launcher for free as a demo http://smart-attendant-demo.onrender.com
